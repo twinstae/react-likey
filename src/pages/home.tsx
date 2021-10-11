@@ -2,22 +2,10 @@ import React, { useState } from 'react';
 import Usage from '../components/Usage';
 import ProductList from '../components/ProductList';
 import { Link } from 'react-router-dom';
+import useProductListAtom from '../state/productListState';
 
 export default function Home(){
-  const [productList, setProductList] = useState<ProductT[]>([]);
-
-    /*
-  function addProduct(e: React.MouseEvent){
-    
-    setProductList(old => [...old, {
-        image: "이미지",
-        link: "이미지",
-        name: "제주 삼다수",
-        price: 5000,
-      }])
-      <button onClick={addProduct}>저장하기</button>
-  }
-  */
+  const { productList } = useProductListAtom();
 
   return (
     <div data-testid="home">
