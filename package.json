@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "./src/index.tsx",
-  "typings": "./src/index.d.ts",
+  "typings": "./src/global.d.ts",
   "scripts": {
     "build": "webpack build --config ./webpack.config.js",
     "start": "webpack serve",

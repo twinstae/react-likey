@@ -1,5 +1,4 @@
-
-export type ProductT = {
+type ProductT = {
     imageLink: string,
     productLink: string,
     productName: string,
