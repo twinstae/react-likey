@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Home /> matches snapshot 1`] = `
+<div>
+  <div
+    id="usage"
+  >
+    <h2>
+      라이키 사용방법
+    </h2>
+  </div>
+</div>
+`;
+
+exports[`메인화면 <Home /> matches snapshot 1`] = `
+<div>
+  <div
+    id="usage"
+  >
+    <h2>
+      라이키 사용방법
+    </h2>
+  </div>
+</div>
+`;
