@@ -8,7 +8,8 @@
     "build": "webpack build --config ./webpack.config.js",
     "start": "webpack serve",
     "test": "jest --env=jsdom --watchAll",
-    "test:state": "jest state --env=node --watch"
+    "test:state": "jest state --env=node --watch",
+    "ci": "cypress install"
   },
   "keywords": [],
   "author": "",
@@ -42,6 +43,7 @@
     "typescript": "^4.3.5",
     "webpack": "^5.51.1",
     "webpack-cli": "^4.8.0",
-    "webpack-dev-server": "^4.0.0"
+    "webpack-dev-server": "^4.0.0",
+    "cypress": "^8.6.0"
   }
 }
