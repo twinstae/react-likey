@@ -8,8 +8,8 @@ type ProductProps = {
 function Product({ product }: ProductProps){
     return (
       <li>
-        <h3>{product.name}</h3>
-        <span>{product.price}</span>
+        <h3>{product.productName}</h3>
+        <span>{product.priceWon}</span>
       </li>
     )
 }
