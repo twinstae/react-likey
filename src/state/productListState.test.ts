@@ -1,5 +1,6 @@
-import { useProductListAtom, createProductListAtom, mutation } from "./productListState";
+import { useProductListAtom, mutation } from "./productListState";
 import { renderHook, act } from '@testing-library/react-hooks'
+import { atom } from "jotai";
 
 const testProduct = {
   id: 1,
@@ -12,7 +13,7 @@ const testProduct = {
 
 describe('productListState', () => {
   it('addProduct하면 productList에 상품이 추가된다.', ()=>{
-    const productListAtom = createProductListAtom([]);
+    const productListAtom = atom([] as ProductT[]);
 
     const { result } = renderHook(() => useProductListAtom(productListAtom));
 
@@ -22,7 +23,7 @@ describe('productListState', () => {
   })
 
   it('deleteProduct하면 productList에서 해당 상품이 삭제된다.', ()=>{
-    const productListAtom = createProductListAtom([testProduct]);
+    const productListAtom = atom([testProduct]);
 
     const { result } = renderHook(() => useProductListAtom(productListAtom));
 
