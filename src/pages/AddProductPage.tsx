@@ -1,7 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useHistory } from 'react-router-dom';
-import useProductListAtom from '../state/productListState';
+import productListAtom, { useProductListAtom } from '../state/productListState';
 
 interface inputWithLabelProps {
   id: string;
@@ -39,7 +39,7 @@ export default function AddProductPage(){
         },
     });
 
-    const { addProduct } = useProductListAtom();
+    const { addProduct } = useProductListAtom(productListAtom);
 
     const history = useHistory();
     const onSubmit = (data: { product: ProductT } ) => {

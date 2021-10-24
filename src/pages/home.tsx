@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Usage from '../components/Usage';
 import ProductList from '../components/ProductList';
 import { Link } from 'react-router-dom';
-import useProductListAtom from '../state/productListState';
+import productListAtom, {useProductListAtom} from '../state/productListState';
 
 export default function Home(){
-  const { productList } = useProductListAtom();
+  const { productList } = useProductListAtom(productListAtom);
 
   return (
     <div data-testid="home">
@@ -14,5 +14,3 @@ export default function Home(){
     </div>
   )
 }
-
-// https://typescript-kr.github.io/pages/declaration-files/creating-dts-files-from-js.html
