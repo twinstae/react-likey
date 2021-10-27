@@ -1,15 +1,20 @@
 import React from 'react';
-
+import productListAtom, {useProductListAtom} from '../state/productListState';
 
 type ProductProps = {
     product: ProductT
 }
 
 function Product({ product }: ProductProps){
+    const { deleteProduct } = useProductListAtom(productListAtom);
+
     return (
       <li>
-        <h3>{product.productName}</h3>
+        <h3>{product.id} {product.productName}</h3>
         <span>{product.priceWon}</span>
+        <button
+          className="delete-product-button"
+          onClick={(e)=>{deleteProduct(product.id)}}>삭제</button>
       </li>
     )
 }

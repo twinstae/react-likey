@@ -23,5 +23,4 @@ export function useProductListAtom(productListAtom: PrimitiveAtom<ProductT[]>){
   }
 }
 
-
-export default atom<ProductT[]>([]);;
+export default atom<ProductT[]>([]);
