@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import AddProductPage from './pages/AddProductPage';
 import Home from './pages/home';
 const App = () => {
+ 
   return (
     <>
         <Switch>
