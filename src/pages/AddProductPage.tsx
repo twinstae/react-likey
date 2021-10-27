@@ -30,6 +30,7 @@ export default function AddProductPage(){
     const { register, handleSubmit } = useForm({
         defaultValues: {
           product: {
+            id: Math.random(),
             imageLink: '',
             productLink: '',
             productName: '',
@@ -44,20 +45,19 @@ export default function AddProductPage(){
     const history = useHistory();
     const onSubmit = (data: { product: ProductT } ) => {
       addProduct(data.product);
-      history.push('/');      
+      history.push('/');
     };
 
     return (
       <div data-testid="add-product-page">
         <form onSubmit={handleSubmit(onSubmit)}>
           <InputWithLabel id="image-link-input" text="이미지 링크" registerInput={register('product.imageLink')} />
-          <InputWithLabel id="product-link-input" text="상품 링크" registerInput={register('product.productLink')} />
-          <InputWithLabel id="product-name-input" text="상품 이름" registerInput={register('product.productName')} />
-          <InputWithLabel id="price-won-input" text="가격(원)" registerInput={register('product.priceWon')} />
+          <InputWithLabel id="product-link-input" text="상품 링크" registerInput={register('product.productLink', { required: true })} />
+          <InputWithLabel id="product-name-input" text="상품 이름" registerInput={register('product.productName', { required: true })} />
+          <InputWithLabel id="price-won-input" text="가격(원)" registerInput={register('product.priceWon', { required: true })} />
           <InputWithLabel id="category-input" text="카테고리" registerInput={register('product.category')} />
           <button id="add-product-button" type="submit">상품 추가</button>
         </form>
-        <Link to="/">돌아가기</Link>
       </div>
     )
   }
