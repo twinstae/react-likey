@@ -1,11 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Usage from '../components/Usage';
 import ProductList from '../components/ProductList';
-import productListAtom, {useProductListAtom} from '../state/productListState';
+import productListAtom from '../state/productListState';
 import AddProductSheet from '../components/AddProductSheet';
+import { PRODUCT_LIST_KEY } from '../constants';
+import { useAtom } from 'jotai';
 
 export default function Home(){
-  const { productList } = useProductListAtom(productListAtom);
+  
+  const [productList, setProductList] = useAtom(productListAtom);
+  
+  useEffect(()=>{
+    const save = localStorage.getItem(PRODUCT_LIST_KEY);
+  
+    if(save){
+      const savedProductList = JSON.parse(save);
+      setProductList(savedProductList);
+    }
+  }, [])
+  
+  useEffect(() => {
+    console.log( JSON.stringify(productList));
+    localStorage.setItem(PRODUCT_LIST_KEY, JSON.stringify(productList));
+  }, [productList])
 
   const [open, setOpen] = useState(false)
 
