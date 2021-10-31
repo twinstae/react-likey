@@ -41,9 +41,26 @@ describe('상품 추가', () => {
     cy.get('#product-list').contains('23520');
   })
 
-  it('상품의 삭제 버튼을 누르면, 상품이 삭제된다.', ()=>{
+  it('상품의 삭제 버튼을 누르면, 팝업이 뜨고, 취소하면 상품이 그대로 있다', ()=>{
+    cy.get(".delete-product-button").click();
+
+    cy.on('window:confirm', (text) => {
+      expect(text).to.contains('삭제하시겠습니까?');
+      return false;
+    });
+    
+    cy.get('#product-list').contains('제주 삼다수');
+    cy.get('#product-list').contains('23520');
+  })
+
+  it('상품의 삭제 버튼을 누르면, 팝업이 뜨고, 팝업에서 확인하면 상품이 삭제된다.', ()=>{
     // 삭제 버튼을 누른다
     cy.get(".delete-product-button").click();
+
+    cy.on('window:confirm', (text) => {
+      expect(text).to.contains('삭제하시겠습니까?');
+      return true;
+    });
 
     // 상품 리스트가 비어있고
     cy.get("#usage");
