@@ -10,7 +10,7 @@ export default function AddProductSheet({open, onDismiss}: {open: boolean, onDis
           onDismiss={onDismiss}
           snapPoints={({ minHeight }) => minHeight}
         >
-          <AddProductPage />
+          <AddProductPage onDismiss={onDismiss}/>
         
           <button onClick={onDismiss} className="w-full">
             취소

@@ -19,7 +19,7 @@ function InputWithLabel({id, text, registerInput}: inputWithLabelProps){
 }
 
 
-export default function AddProductPage(){ 
+export default function AddProductPage({onDismiss}: {onDismiss: () => void}){ 
     /*
     이미지 링크 (수정 불가)
     상품 링크 (수정 불가)
@@ -45,7 +45,8 @@ export default function AddProductPage(){
     const history = useHistory();
     const onSubmit = (data: { product: ProductT } ) => {
       addProduct(data.product);
-      history.push('/');
+      
+      onDismiss();
     };
 
     return (
