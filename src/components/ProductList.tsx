@@ -8,13 +8,21 @@ type ProductProps = {
 function Product({ product }: ProductProps){
     const { deleteProduct } = useProductListAtom(productListAtom);
 
+    const handleDelete = (e: React.MouseEvent<HTMLButtonElement>)=>{
+
+      const result = window.confirm('삭제하시겠습니까?');
+      if (result){
+        deleteProduct(product.id)
+      }
+    };
+
     return (
       <li>
         <h3>{product.id} {product.productName}</h3>
         <span>{product.priceWon}</span>
         <button
           className="delete-product-button"
-          onClick={(e)=>{deleteProduct(product.id)}}>삭제</button>
+          onClick={handleDelete}>삭제</button>
       </li>
     )
 }
