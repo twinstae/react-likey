@@ -12,7 +12,7 @@ export default function AddProductSheet({open, onDismiss}: {open: boolean, onDis
         >
           <AddProductPage onDismiss={onDismiss}/>
         
-          <button onClick={onDismiss} className="w-full">
+          <button id="cancel-add-product-button" onClick={onDismiss} className="w-full">
             취소
           </button>
       </BottomSheet>
