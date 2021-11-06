@@ -1,7 +1,6 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { Link, useHistory } from 'react-router-dom';
-import bottomSheetAtom, { useBottomSheetAtom } from '../state/bottomSheetAtomState';
+import { useHistory } from 'react-router-dom';
 import productListAtom, { useProductListAtom } from '../state/productListState';
 
 interface inputWithLabelProps {
@@ -20,7 +19,7 @@ function InputWithLabel({id, text, registerInput}: inputWithLabelProps){
 }
 
 
-export default function AddProductPage(){ 
+export default function AddProductForm({dismiss} : {dismiss: ()=>void}){ 
     /*
     이미지 링크 (수정 불가)
     상품 링크 (수정 불가)
@@ -42,7 +41,6 @@ export default function AddProductPage(){
     });
 
     const { addProduct } = useProductListAtom(productListAtom);
-    const {dismiss} = useBottomSheetAtom(bottomSheetAtom);
 
     const history = useHistory();
     const onSubmit = (data: { product: ProductT } ) => {
