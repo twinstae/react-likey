@@ -5,6 +5,7 @@ import productListAtom from '../state/productListState';
 import AddProductSheet from '../components/AddProductSheet';
 import { PRODUCT_LIST_KEY } from '../constants';
 import { useAtom } from 'jotai';
+import bottomSheetAtom, { useBottomSheetAtom } from "../state/bottomSheetAtomState";
 
 export default function Home(){
   
@@ -24,17 +25,13 @@ export default function Home(){
     localStorage.setItem(PRODUCT_LIST_KEY, JSON.stringify(productList));
   }, [productList])
 
-  const [open, setOpen] = useState(false)
-
-  function onDismiss() {
-    setOpen(false)
-  }
+  const {open} = useBottomSheetAtom(bottomSheetAtom);
 
   return (
     <div data-testid="home">
       {productList.length === 0 ? <Usage /> : <ProductList productList={productList}/>}
-      <button id="add-product-link" onClick={()=>setOpen(true)}>저장하기</button>
-      <AddProductSheet open={open} onDismiss={onDismiss}/>
+      <button id="add-product-link" onClick={open}>저장하기</button>
+      <AddProductSheet />
     </div>
   )
 }
