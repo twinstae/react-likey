@@ -3,27 +3,27 @@ import Usage from '../components/Usage';
 import ProductList from '../components/ProductList';
 import productListAtom from '../state/productListState';
 import AddProductSheet from '../components/AddProductSheet';
-import { PRODUCT_LIST_KEY } from '../constants';
+
 import { useAtom } from 'jotai';
 import bottomSheetAtom, { useBottomSheetAtom } from "../state/bottomSheetAtomState";
+import createLocalStorageRepository from "../repository/localStorageRepository";
+
+
 
 export default function Home(){
   
   const [productList, setProductList] = useAtom(productListAtom);
   
+  const {loadAllProduct, saveAllProduct} = createLocalStorageRepository();
   useEffect(()=>{
-    const save = localStorage.getItem(PRODUCT_LIST_KEY);
-  
-    if(save){
-      const savedProductList = JSON.parse(save);
+    const savedProductList = loadAllProduct();
+
+    if(savedProductList){
       setProductList(savedProductList);
     }
   }, [])
   
-  useEffect(() => {
-    console.log( JSON.stringify(productList));
-    localStorage.setItem(PRODUCT_LIST_KEY, JSON.stringify(productList));
-  }, [productList])
+  useEffect(() => saveAllProduct(productList), [productList])
 
   const {open} = useBottomSheetAtom(bottomSheetAtom);
 
