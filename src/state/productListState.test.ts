@@ -12,10 +12,14 @@ const testProduct = {
 }
 
 describe('productListState', () => {
-  it('addProduct하면 productList에 상품이 추가된다.', ()=>{
-    const productListAtom = atom([] as ProductT[]);
-
+  function createAndRenderHook(initValue: ProductT[]){
+    const productListAtom = atom(initValue);
     const { result } = renderHook(() => useProductListAtom(productListAtom));
+
+    return result;
+  }
+  it('addProduct하면 productList에 상품이 추가된다.', ()=>{
+    const result = createAndRenderHook([] as ProductT[]);
 
     act(() => result.current.addProduct(testProduct));
 
@@ -23,12 +27,10 @@ describe('productListState', () => {
   })
 
   it('deleteProduct하면 productList에서 해당 상품이 삭제된다.', ()=>{
-    const productListAtom = atom([testProduct]);
-
-    const { result } = renderHook(() => useProductListAtom(productListAtom));
+    const result = createAndRenderHook([] as ProductT[]);
 
     act(() => result.current.deleteProduct(testProduct.id));
-
+    
     expect(result.current.productList).toEqual([]);
   })
 
