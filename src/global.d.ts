@@ -6,3 +6,9 @@ type ProductT = {
     priceWon: number,
     category: string,
 }
+
+
+interface ProductRepository {
+  loadAllProduct: () => ProductT[] | null;
+  saveAllProduct: (productList: ProductT[]) => void;
+}

@@ -1,6 +1,7 @@
 import { PRODUCT_LIST_KEY } from '../constants';
 
-export default function createLocalStorageRepository(){
+
+export default function createLocalStorageRepository(): ProductRepository {
 
   // void => Product[]
   function loadAllProduct(): ProductT[] | null{
