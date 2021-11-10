@@ -1,10 +1,10 @@
 import React from "react";
 import { BottomSheet } from "react-spring-bottom-sheet";
 import AddProductForm from "./AddProductForm";
-import bottomSheetAtom, { useBottomSheetAtom } from "../state/bottomSheetAtomState";
+import { useBottomSheetAtom } from "../state/bottomSheetAtomState";
 
 export default function AddProductSheet(){    
-  const {isOpen, dismiss} = useBottomSheetAtom(bottomSheetAtom);
+  const {isOpen, dismiss} = useBottomSheetAtom();
 
   return (
     <BottomSheet

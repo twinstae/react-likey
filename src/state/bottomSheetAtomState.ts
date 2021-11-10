@@ -1,14 +1,18 @@
-import { atom, PrimitiveAtom, useAtom } from 'jotai';
+import { atom, useAtom } from 'jotai';
 
-const bottomSheetAtom = atom(false);
+export const isOpenAtom = atom(false);
+export const productLinkAtom = atom(null as string | null);
 
-export function useBottomSheetAtom(isOpenAtom: PrimitiveAtom<boolean>){
+export function useBottomSheetAtom(){
   const [isOpen, setIsOpen] = useAtom(isOpenAtom);
+  const [productLink, setProductLink] = useAtom(productLinkAtom);
   return {
     isOpen,
-    open: ()=>setIsOpen(true),
+    open: (newLink: string)=> {
+      setProductLink(newLink);
+      setIsOpen(true);
+    },
     dismiss: ()=>setIsOpen(false),
+    productLink
   }
 }
-
-export default bottomSheetAtom;

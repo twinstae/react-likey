@@ -5,7 +5,7 @@ import productListAtom from '../state/productListState';
 import AddProductSheet from '../components/AddProductSheet';
 
 import { useAtom } from 'jotai';
-import bottomSheetAtom, { useBottomSheetAtom } from "../state/bottomSheetAtomState";
+import { useBottomSheetAtom } from "../state/bottomSheetAtomState";
 import createLocalStorageRepository from "../repository/localStorageRepository";
 
 
@@ -14,23 +14,26 @@ export default function Home(){
   
   const [productList, setProductList] = useAtom(productListAtom);
   
+  const {open} = useBottomSheetAtom();
+
   const {loadAllProduct, saveAllProduct} = createLocalStorageRepository();
+
   useEffect(()=>{
     const savedProductList = loadAllProduct();
 
-    if(savedProductList){
-      setProductList(savedProductList);
+    if(savedProductList !== null){
+      setProductList(_ => savedProductList);
     }
   }, [])
   
   useEffect(() => saveAllProduct(productList), [productList])
 
-  const {open} = useBottomSheetAtom(bottomSheetAtom);
-
   return (
     <div data-testid="home">
       {productList.length === 0 ? <Usage /> : <ProductList productList={productList}/>}
-      <button id="add-product-link" onClick={open}>저장하기</button>
+      <button id="add-product-link" onClick={(e)=>{
+        navigator.clipboard.readText().then(open);
+      }}>저장하기</button>
       <AddProductSheet />
     </div>
   )

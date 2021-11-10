@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
+import { useBottomSheetAtom } from '../state/bottomSheetAtomState';
 import productListAtom, { useProductListAtom } from '../state/productListState';
 
 interface inputWithLabelProps {
@@ -27,7 +28,7 @@ export default function AddProductForm({dismiss} : {dismiss: ()=>void}){
     가격과 단위 (required)
     카테고리 선택 (전체가 기본)
     */
-    const { register, handleSubmit } = useForm({
+    const { register, handleSubmit, setValue } = useForm({
         defaultValues: {
           product: {
             id: Math.random(),
@@ -39,6 +40,14 @@ export default function AddProductForm({dismiss} : {dismiss: ()=>void}){
           },
         },
     });
+
+    const {productLink} = useBottomSheetAtom();
+
+    useEffect(()=>{
+      if(productLink){
+        setValue('product.productLink', productLink, { shouldValidate: true })
+      }
+    }, [productLink])
 
     const { addProduct } = useProductListAtom(productListAtom);
 
