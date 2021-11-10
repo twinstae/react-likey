@@ -1,6 +1,21 @@
 const HOST = 'http://localhost:3000/';
 
+const TEST_PRODUCT = {
+  id: 1,
+  imageLink: 'https://thumbnail8.coupangcdn.com/thumbnails/remote/230x230ex/image/retail/images/597195908017512-e5a3f864-9d3d-45a9-99df-6b3f57410b7f.jpg',
+  productLink: 'https://www.coupang.com/vp/products/5585425593?itemId=3423820284&vendorItemId=71503222724',
+  productName: '제주 삼다수',
+  priceWon: 23520,
+  category: 'all',
+}
+
 describe('상품 추가', () => {
+
+  function expectProductExist(product){
+    cy.get('#product-list').contains(product.productName);
+    cy.get('#product-list').contains(product.priceWon);
+  }
+
   it('저장하기 버튼을 누르면, 상품 추가 sheet가 올라온다', () => {
     cy.visit(HOST)
     // 상품 리스트가 처음에 비어 있다
@@ -41,18 +56,15 @@ describe('상품 추가', () => {
   })
 
   it('필수 값을 모두 입력하고 상품 추가를 누르면, 상품이 추가되고 sheet가 닫힌다.', () => {
-    cy.get('#image-link-input').invoke('val', 'https://thumbnail8.coupangcdn.com/thumbnails/remote/230x230ex/image/retail/images/597195908017512-e5a3f864-9d3d-45a9-99df-6b3f57410b7f.jpg')
-    cy.get('#product-link-input').invoke('val', 'https://www.coupang.com/vp/products/5585425593?itemId=3423820284&vendorItemId=71503222724');
+    cy.get('#image-link-input').invoke('val', TEST_PRODUCT.imageLink)
+    cy.get('#product-link-input').invoke('val', TEST_PRODUCT.productLink);
     // 뭔가 이건 아닌 것 같은데. 왜 이렇게 노가다가 되는 걸까 form이라는 것은...
-    cy.get('#product-name-input').type('제주 삼다수');
-    cy.get('#price-won-input').type('{backspace}{backspace}23520');
+    cy.get('#product-name-input').type(TEST_PRODUCT.productName);
+    cy.get('#price-won-input').type(`{backspace}{backspace}${TEST_PRODUCT.priceWon}`);
 
     cy.get('#add-product-button').click();
 
-    cy.get('#product-list').contains('제주 삼다수');
-    cy.get('#product-list').contains('23520');
-
-
+    expectProductExist(TEST_PRODUCT);
   })
 
   // it('새로고침해도 목록에 있던 상품을 다시 불러온다.', () => {
@@ -71,8 +83,7 @@ describe('상품 추가', () => {
       return false;
     });
 
-    cy.get('#product-list').contains('제주 삼다수');
-    cy.get('#product-list').contains('23520');
+    expectProductExist(TEST_PRODUCT);
   })
 
   it('상품의 삭제 버튼을 누르면, 팝업이 뜨고, 팝업에서 확인하면 상품이 삭제된다.', () => {
