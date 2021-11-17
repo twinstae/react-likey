@@ -1,5 +1,4 @@
 import React from 'react';
-import { screen, fireEvent, render } from '@testing-library/react';
 import Home from './home';
 import { renderWithRouter } from '../testUtil';
 
