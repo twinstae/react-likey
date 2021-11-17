@@ -20,7 +20,9 @@ function useClipBoardToast(){
   }, [clipBoardText])
 
   useEffect(() =>{
-    const interval = setInterval(()=> navigator.clipboard.readText().then(setClipBoardText), 3 * 1000) // 3초마다 확인
+    const interval = setInterval(()=> navigator.clipboard.readText().then(setClipBoardText), 3 * 1000)
+    // 3초마다 확인
+
     return () => clearInterval(interval);
   }, [])
 
@@ -47,7 +49,7 @@ export default function Home(){
 
   const {open} = useBottomSheetAtom();
 
-  const { setClipBoardText }  = useClipBoardToast();
+  const { setClipBoardText } = useClipBoardToast();
 
   return (
     <div data-testid="home">
