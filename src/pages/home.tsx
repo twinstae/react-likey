@@ -52,7 +52,7 @@ export default function Home(){
   return (
     <div data-testid="home">
       {productList.length === 0 ? <Usage /> : <ProductList productList={productList}/>}
-      <button id="add-product-link" onClick={(e)=>{
+      <button id="add-product-link" className="text-4xl rounded p-2 border-black border-2" onClick={(e)=>{
         navigator.clipboard.readText().then(text => {
           setClipBoardText(text);
           open(text);
