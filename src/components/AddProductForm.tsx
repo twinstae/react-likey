@@ -46,6 +46,13 @@ export default function AddProductForm({dismiss} : {dismiss: ()=>void}){
     useEffect(()=>{
       if(productLink){
         setValue('product.productLink', productLink, { shouldValidate: true })
+
+        fetch("http://localhost:8000/og?url="+productLink)
+          .then(res => res.json()) // {title: "..."}
+          .then(({title, image}) => {
+            setValue('product.productName', title, { shouldValidate: true })
+            setValue('product.imageLink', image, { shouldValidate: true })
+          })
       }
     }, [productLink])
 
@@ -62,6 +69,7 @@ export default function AddProductForm({dismiss} : {dismiss: ()=>void}){
       <div data-testid="add-product-page">
         <form onSubmit={handleSubmit(onSubmit)}>
           <InputWithLabel id="image-link-input" text="이미지 링크" registerInput={register('product.imageLink')} />
+
           <InputWithLabel id="product-link-input" text="상품 링크" registerInput={register('product.productLink', { required: true })} />
           <InputWithLabel id="product-name-input" text="상품 이름" registerInput={register('product.productName', { required: true })} />
           <InputWithLabel id="price-won-input" text="가격(원)" registerInput={register('product.priceWon', { required: true })} />
