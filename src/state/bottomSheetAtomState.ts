@@ -8,11 +8,11 @@ export function useBottomSheetAtom(){
   const [productLink, setProductLink] = useAtom(productLinkAtom);
   return {
     isOpen,
+    productLink,
     open: (newLink: string)=> {
       setProductLink(newLink);
       setIsOpen(true);
     },
     dismiss: ()=>setIsOpen(false),
-    productLink
   }
 }

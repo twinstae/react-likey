@@ -26,13 +26,15 @@ function useClipBoardToast(){
     return () => clearInterval(interval);
   }, [])
 
-  return { clipBoardText, setClipBoardText };
+  const {open} = useBottomSheetAtom();
+
+  return { clipBoardText, open: (url: string) => {
+    setClipBoardText(url);
+    open(url);
+  } };
 }
 
-
-
-
-export default function Home(){
+function useProductListBackUp(){
   const [productList, setProductList] = useAtom(productListAtom);
 
   const {loadAllProduct, saveAllProduct} = createLocalStorageRepository();
@@ -47,18 +49,20 @@ export default function Home(){
   
   useEffect(() => { saveAllProduct(productList) }, [productList])
 
-  const {open} = useBottomSheetAtom();
+  return { productList };
+}
 
-  const { setClipBoardText } = useClipBoardToast();
+
+export default function Home(){
+  const {productList} = useProductListBackUp();
+
+  const { open } = useClipBoardToast();
 
   return (
     <div data-testid="home">
       {productList.length === 0 ? <Usage /> : <ProductList productList={productList}/>}
       <button id="add-product-link" className="text-4xl rounded p-2 border-black border-2" onClick={(e)=>{
-        navigator.clipboard.readText().then(text => {
-          setClipBoardText(text);
-          open(text);
-        });
+        navigator.clipboard.readText().then(open);
       }}>저장하기</button>
       <AddProductSheet />
       <Toaster />

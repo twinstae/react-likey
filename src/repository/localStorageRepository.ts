@@ -3,7 +3,7 @@ import { PRODUCT_LIST_KEY } from '../constants';
 
 export default function createLocalStorageRepository(): ProductRepository {
 
-  // void => Product[]
+  // void => Product[] | null
   function loadAllProduct(): ProductT[] | null{
     const save = localStorage.getItem(PRODUCT_LIST_KEY);
     
