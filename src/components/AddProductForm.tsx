@@ -70,7 +70,7 @@ export default function AddProductForm({dismiss} : {dismiss: ()=>void}){
       <div data-testid="add-product-page">
         <form className="p-4"
           onSubmit={handleSubmit(onSubmit)}>
-          {imageLink && <img src={imageLink}/>}
+          {imageLink && <img className="h-32" src={imageLink}/>}
           <InputWithLabel id="image-link-input" text="이미지 링크" registerInput={register('product.imageLink')} />
           <InputWithLabel id="product-link-input" text="상품 링크" registerInput={register('product.productLink', { required: true })} />
           <InputWithLabel id="product-name-input" text="상품 이름" registerInput={register('product.productName', { required: true })} />
