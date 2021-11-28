@@ -1,38 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Usage from '../components/Usage';
 import ProductList from '../components/ProductList';
 import productListAtom from '../state/productListState';
 import AddProductSheet from '../components/AddProductSheet';
 
 import { useAtom } from 'jotai';
-import { useBottomSheetAtom } from "../state/bottomSheetAtomState";
 import createLocalStorageRepository from "../repository/localStorageRepository";
-import toast, { Toaster } from "react-hot-toast";
-
-
-function useClipBoardToast(){
-  const [clipBoardText, setClipBoardText] = useState("")
-
-  useEffect(() => { 
-    if (clipBoardText !== ""){
-      toast(clipBoardText);
-    }
-  }, [clipBoardText])
-
-  useEffect(() =>{
-    const interval = setInterval(()=> navigator.clipboard.readText().then(setClipBoardText), 3 * 1000)
-    // 3초마다 확인
-
-    return () => clearInterval(interval);
-  }, [])
-
-  const {open} = useBottomSheetAtom();
-
-  return { clipBoardText, open: (url: string) => {
-    setClipBoardText(url);
-    open(url);
-  } };
-}
+import { Toaster } from "react-hot-toast";
+import useClipBoardToast from "../state/useClipBoardToast";
 
 function useProductListBackUp(){
   const [productList, setProductList] = useAtom(productListAtom);
