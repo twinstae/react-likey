@@ -1,26 +1,10 @@
 // Try<ProductT>
 // ProductT | Error
 
-function useFakeAPI() {
-  
-  function getProductFromOGUrl(url: string): ProductT | Error {
-    const testProduct = {
-        id: 1,
-        imageLink: "test",
-        productLink: "test",
-        productName: "test",
-        priceWon: 2000,
-        category: "all",
-    }
+const HOST = 'http://localhost:8000';
 
-    return testProduct;
-  }
-
-  return { getProductFromOGUrl }
+export function getProductFromOGUrl(productLink: string): Promise<ProductT>{
+  return fetch(HOST + "/og?url="+productLink)
+    .then(res => res.json())
+    .catch(err => err)
 }
-
-function useRealAPI(){
-  
-}
-
-export default useFakeAPI;

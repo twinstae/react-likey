@@ -20,9 +20,12 @@ function useClipBoardToast(){
   
     const {open} = useBottomSheetAtom();
   
-    return { clipBoardText, open: (url: string) => {
-      setClipBoardText(url);
-      open(url);
-    } };
+    return {
+      clipBoardText,
+      open: (url: string) => {
+        setClipBoardText(url);
+        open(url);
+      }
+    };
   }
 export default useClipBoardToast;

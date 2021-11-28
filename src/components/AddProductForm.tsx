@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 // import { useHistory } from 'react-router-dom';
 import { useBottomSheetAtom } from '../state/bottomSheetAtomState';
 import productListAtom, { useProductListAtom } from '../state/productListState';
+import { getProductFromOGUrl } from '../api';
 
 interface inputWithLabelProps {
   id: string;
@@ -47,8 +48,7 @@ export default function AddProductForm({dismiss} : {dismiss: ()=>void}){
       if(productLink){
         setValue('product.productLink', productLink, { shouldValidate: true })
 
-        fetch("http://localhost:8000/og?url="+productLink)
-          .then(res => res.json()) // {title: "..."}
+        getProductFromOGUrl(productLink) // {title: "..."}
           .then(({title, image}) => {
             setValue('product.productName', title, { shouldValidate: true })
             setValue('product.imageLink', image, { shouldValidate: true })
@@ -61,7 +61,6 @@ export default function AddProductForm({dismiss} : {dismiss: ()=>void}){
     // const history = useHistory();
     const onSubmit = (data: { product: ProductT } ) => {
       addProduct(data.product);
-      
       dismiss();
     };
 
