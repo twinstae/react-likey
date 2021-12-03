@@ -11,14 +11,23 @@ interface inputWithLabelProps {
   id: string;
   text: string;
   registerInput: unknown;
+  isError?: boolean;
 }
 
-function InputWithLabel({ id, text, registerInput }: inputWithLabelProps) {
+function InputWithLabel({
+  id,
+  text,
+  registerInput,
+  isError,
+}: inputWithLabelProps) {
   return (
-    <label htmlFor={id}>
+    <label htmlFor={id} className="text-lg font-semibold">
       {text}
       <input
-        className="transition-colors duration-500 border-b-2 border-gray-300 w-full text-gray-800 leading-normal shadow-none outline-none focus:outline-none focus:ring-0 focus:text-gray-800 focus:border-indigo-300 px-0 mb-2 bg-transparent"
+        className={
+          "text-base font-normal transition-colors duration-500 border-b-2 border-gray-300 w-full text-gray-800 leading-normal shadow-none outline-none focus:outline-none focus:ring-0 focus:text-gray-800 focus:border-indigo-300 px-0 mb-2 bg-transparent " +
+          (isError === true ? "border-red-400" : "")
+        }
         id={id}
         {...registerInput}
       />
@@ -34,7 +43,13 @@ export default function AddProductForm({ dismiss }: { dismiss: () => void }) {
     가격과 단위 (required)
     카테고리 선택 (전체가 기본)
     */
-  const { register, handleSubmit, setValue, watch } = useForm({
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    watch,
+    formState: { errors },
+  } = useForm({
     defaultValues: {
       product: {
         id: uuid(),
@@ -71,6 +86,9 @@ export default function AddProductForm({ dismiss }: { dismiss: () => void }) {
 
   const imageLink = watch("product.imageLink");
 
+  const VALID_URL_REGEX =
+    /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/;
+
   return (
     <div data-testid="add-product-page">
       <form className="p-4" onSubmit={handleSubmit(onSubmit)}>
@@ -83,8 +101,25 @@ export default function AddProductForm({ dismiss }: { dismiss: () => void }) {
         <InputWithLabel
           id="product-link-input"
           text="상품 링크"
-          registerInput={register("product.productLink", { required: true })}
+          registerInput={register("product.productLink", {
+            required: true,
+            onChange: (e) => {
+              setValue("product.productLink", e.target.value, {
+                shouldValidate: true,
+              });
+            },
+            validate: {
+              validUrl: (value) => VALID_URL_REGEX.test(value),
+            },
+          })}
+          isError={errors.product?.productLink?.type === "validUrl"}
         />
+        {errors.product?.productLink?.type === "validUrl" ? (
+          <span className="text-red-400">
+            올바른 url 형식이 아닙니다
+            <br />
+          </span>
+        ) : undefined}
         <InputWithLabel
           id="product-name-input"
           text="상품 이름"
