@@ -1,7 +1,7 @@
 import {atom, PrimitiveAtom, useAtom} from "jotai";
 
 export const mutation = { 
-  deleteProduct: (productId: number) => (old: ProductT[]) => old.filter(product => product.id !== productId)
+  deleteProduct: (productId: string) => (old: ProductT[]) => old.filter(product => product.id !== productId)
 }
 
 export function useProductListAtom(productListAtom: PrimitiveAtom<ProductT[]>){
@@ -11,7 +11,7 @@ export function useProductListAtom(productListAtom: PrimitiveAtom<ProductT[]>){
     setProductList((old: ProductT[]) => [...old, product])
   }
 
-  function deleteProduct(productId: number){
+  function deleteProduct(productId: string){
     setProductList(mutation.deleteProduct(productId))
   }
 

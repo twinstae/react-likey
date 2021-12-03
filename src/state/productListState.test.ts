@@ -3,7 +3,7 @@ import { renderHook, act } from '@testing-library/react-hooks'
 import { atom } from "jotai";
 
 const testProduct = {
-  id: 1,
+  id: 'f4e1f41f-4377-44ed-98da-bcfebd1c964d',
   imageLink: "test",
   productLink: "test",
   productName: "test",
@@ -35,7 +35,7 @@ describe('productListState', () => {
   })
 
   it('함수형 식으로 deleteProductList', ()=>{
-    const result = mutation.deleteProduct(1)([testProduct]);
+    const result = mutation.deleteProduct(testProduct.id)([testProduct]);
     expect(result).toEqual([]);
   })
 })
