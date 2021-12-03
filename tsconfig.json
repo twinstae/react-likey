@@ -32,7 +32,7 @@
       "src/**/*.jsx",
       "src/**/*.ts",
       "src/**/*.tsx"
-    ],
+, "jest.config.js"    ],
     "exclude": [
       "node_modules",
       "**/*-aot.ts"
