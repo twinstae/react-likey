@@ -17,8 +17,10 @@ function Product({ product }: ProductProps) {
 
   return (
     <li className="border-b-2 border-indigo-600 m-2 mb-4">
-      <img className="h-32" src={product.imageLink} />
-      <h3>{product.productName}</h3>
+      <a href={product.productLink} target="_blank">
+        <img className="h-32" src={product.imageLink} />
+        <h3>{product.productName}</h3>
+      </a>
       <span className="font-bold">{product.priceWon}원</span>
       <br />
       <button
