@@ -1,5 +1,5 @@
 type ProductT = {
-    id: number,
+    id: string,
     imageLink: string,
     productLink: string,
     productName: string,

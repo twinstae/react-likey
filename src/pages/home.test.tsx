@@ -1,16 +1,16 @@
-import React from 'react';
-import Home from './home';
-import { renderWithRouter } from '../testUtil';
+import React from "react";
+import Home from "./home";
+import { renderWithRouter } from "../testUtil";
 
-describe('메인화면 <Home />', () => {
-  xit('matches snapshot', () => {
+describe("메인화면 <Home />", () => {
+  xit("matches snapshot", () => {
     const utils = renderWithRouter(Home);
     expect(utils.container).toMatchSnapshot();
   });
 
-  it('시작하면, 리스트는 비어 있고 사용방법이 보인다', () => {
+  it("시작하면, 리스트는 비어 있고 사용방법이 보인다", () => {
     const utils = renderWithRouter(Home);
-    const usage = utils.getByText('라이키 사용방법');
+    const usage = utils.getByText("라이키 사용방법");
     expect(usage).not.toBeNull();
   });
 
