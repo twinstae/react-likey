@@ -75,6 +75,15 @@ describe('상품 추가', () => {
   //   cy.get('#product-list').contains('23520');
   // })
 
+  it('요구하는 필드를 입력하지 않으면 상품을 추가할 수 없다', () => {
+    cy.get('#product-list')
+      .get('a')
+      .first()
+      .click()
+    
+      cy.url().should('eq', TEST_PRODUCT.productLink)
+  })
+
   it('상품의 삭제 버튼을 누르면, 팝업이 뜨고, 취소하면 상품이 그대로 있다', () => {
     cy.get(".delete-product-button").click();
 
