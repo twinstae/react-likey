@@ -6,13 +6,14 @@ import productListAtom, { useProductListAtom } from "../state/productListState";
 import { getProductFromOGUrl } from "../api";
 
 import uuid from "../uuid";
+import { useCategoryAtom } from "../state/categoryState";
 
 interface inputWithLabelProps {
   id: string;
   text: string;
   registerInput: unknown;
   isError?: boolean;
-  type: "number" | "text" | "url";
+  type: "number" | "text" | "url" | "select";
 }
 //https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=125174961
 
@@ -61,7 +62,7 @@ export default function AddProductForm({ dismiss }: { dismiss: () => void }) {
         productLink: "",
         productName: "",
         priceWon: 0,
-        category: "all",
+        category: "전체",
       },
     },
   });
@@ -89,6 +90,8 @@ export default function AddProductForm({ dismiss }: { dismiss: () => void }) {
   };
 
   const imageLink = watch("product.imageLink");
+
+  const { categoryList } = useCategoryAtom();
 
   return (
     <div data-testid="add-product-page">
@@ -135,12 +138,18 @@ export default function AddProductForm({ dismiss }: { dismiss: () => void }) {
             valueAsNumber: true,
           })}
         />
-        <InputWithLabel
-          id="category-input"
-          text="카테고리"
-          type="text"
-          registerInput={register("product.category")}
-        />
+        <label htmlFor="category-input" className="text-lg font-semibold">
+          카테고리
+          <select
+            className="text-base font-normal transition-colors duration-500 border-b-2 border-gray-300 w-full text-gray-800 leading-normal shadow-none outline-none focus:outline-none focus:ring-0 focus:text-gray-800 focus:border-indigo-300 px-0 mb-2 bg-transparent invalid:border-red-400"
+            id="category-input"
+            {...register("product.category")}
+          >
+            {categoryList.map((name) => (
+              <option value={name}>{name}</option>
+            ))}
+          </select>
+        </label>
 
         <button
           id="add-product-button"
