@@ -48,24 +48,25 @@ export default function AddProductForm({ dismiss }: { dismiss: () => void }) {
     가격과 단위 (required)
     카테고리 선택 (전체가 기본)
     */
+
+  const defaultValues = {
+    product: {
+      id: uuid(),
+      imageLink: "",
+      productLink: "",
+      productName: "",
+      priceWon: 0,
+      category: "전체",
+    },
+  };
   const {
     register,
     handleSubmit,
     setValue,
     watch,
+    reset,
     formState: { errors },
-  } = useForm({
-    defaultValues: {
-      product: {
-        id: uuid(),
-        imageLink: "",
-        productLink: "",
-        productName: "",
-        priceWon: 0,
-        category: "전체",
-      },
-    },
-  });
+  } = useForm({ defaultValues });
 
   const { productLink } = useBottomSheetAtom();
 
@@ -86,6 +87,7 @@ export default function AddProductForm({ dismiss }: { dismiss: () => void }) {
   // const history = useHistory();
   const onSubmit = (data: { product: ProductT }) => {
     addProduct(data.product);
+    reset(defaultValues);
     dismiss();
   };
 

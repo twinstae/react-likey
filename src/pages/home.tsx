@@ -15,7 +15,7 @@ export default function Home() {
     <>
       <div
         data-testid="home"
-        className="w-full max-w-2xl mx-auto mb-16 p-2 shadow overflow-hidden border-b border-gray-200 sm:rounded-lg"
+        className="w-full max-w-lg mx-auto mb-16 p-2 shadow overflow-hidden border-b border-gray-200 sm:rounded-lg"
       >
         {productList.length === 0 ? (
           <Usage />
@@ -24,7 +24,6 @@ export default function Home() {
         )}
 
         <AddProductSheet />
-        <Toaster />
       </div>
       <button
         id="add-product-link"
@@ -35,6 +34,8 @@ export default function Home() {
       >
         저장하기
       </button>
+
+      <Toaster />
     </>
   );
 }

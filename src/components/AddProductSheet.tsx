@@ -12,6 +12,7 @@ export default function AddProductSheet() {
       open={isOpen}
       onDismiss={dismiss}
       snapPoints={({ minHeight }) => minHeight}
+      className="flex justify-center items-center max-w-lg"
     >
       <AddProductForm dismiss={dismiss} />
 

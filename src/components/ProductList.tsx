@@ -23,8 +23,9 @@ function Product({ product }: ProductProps) {
       </a>
       <span className="font-bold">{product.priceWon}원</span>
       <br />
-      {product.category}
-      <br />
+      <span className="font-bold text-sm max-w-max flex items-center justify-between py-0.5 px-3 rounded-full bg-indigo-100 last:mr-0 mr-1 transition-all duration-300 text-indigo-600">
+        {product.category}
+      </span>
       <button
         className="transition-colors duration-200 delete-product-button w-12 flex justify-center py-1 px-2 m-1 border border-transparent text-sm font-medium rounded-md text-white bg-gray-400 hover:bg-red-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 "
         onClick={handleDelete}
