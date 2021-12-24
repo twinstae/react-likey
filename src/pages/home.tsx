@@ -2,21 +2,17 @@ import React from "react";
 import Usage from "../components/Usage";
 import ProductList from "../components/ProductList";
 import AddProductSheet from "../components/AddProductSheet";
-import { Toaster } from "react-hot-toast";
-import useClipBoardToast from "../state/useClipBoardToast";
+import useClipBoardAtom from "../state/useClipBoardAtom";
 import useProductListBackUp from "../state/useProductListBackUp";
 
 export default function Home() {
   const { productList } = useProductListBackUp();
 
-  const { open } = useClipBoardToast();
+  const { open } = useClipBoardAtom();
 
   return (
     <>
-      <div
-        data-testid="home"
-        className="w-full max-w-lg mx-auto mb-16 p-2 shadow overflow-hidden border-b border-gray-200 sm:rounded-lg"
-      >
+      <div data-testid="home">
         {productList.length === 0 ? (
           <Usage />
         ) : (
@@ -34,8 +30,6 @@ export default function Home() {
       >
         저장하기
       </button>
-
-      <Toaster />
     </>
   );
 }

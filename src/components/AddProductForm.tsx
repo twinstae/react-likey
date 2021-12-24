@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 // import { useHistory } from 'react-router-dom';
-import { useBottomSheetAtom } from "../state/bottomSheetAtomState";
+import { useBottomSheetAtom } from "../state/bottomSheetAtom";
 import productListAtom, { useProductListAtom } from "../state/productListState";
 import { getProductFromOGUrl } from "../api";
 

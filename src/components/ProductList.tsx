@@ -43,7 +43,6 @@ type ProductListProps = {
 export default function ProductList({ productList }: ProductListProps) {
   return (
     <>
-      <h2 className="text-2xl text-indigo-600">상품 리스트</h2>
       <ul id="product-list">
         {productList.map((product) => (
           <Product product={product} key={product.productName} />
