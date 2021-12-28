@@ -14,7 +14,8 @@ module.exports = {
     rules: [
       {
         test: /.(js|jsx|ts|tsx)$/,
-        exclude: /(node_modules|bower_components)/,
+        // exclude: /(node_modules|bower_components)/,
+        exclude: /(node_modules)/,
         use: {
           loader: "babel-loader",
           options: {
@@ -25,6 +26,11 @@ module.exports = {
       {
         test: /.css$/,
         use: ["style-loader", "css-loader", "postcss-loader"],
+      },
+      {
+      //  test: /.(png|jpe?g|gif|svg|webp)$/i,
+        test: /.(png|jpe?g|gif|svg|webp)$/i,
+        use: ['file-loader']
       },
     ],
   },
