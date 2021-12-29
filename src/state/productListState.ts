@@ -1,26 +1,27 @@
-import {atom, PrimitiveAtom, useAtom} from "jotai";
+import { atom, PrimitiveAtom, useAtom } from "jotai";
 
-export const mutation = { 
-  deleteProduct: (productId: string) => (old: ProductT[]) => old.filter(product => product.id !== productId)
-}
+export const mutation = {
+  deleteProduct: (productId: string) => (old: ProductT[]) =>
+    old.filter((product) => product.id !== productId),
+};
 
-export function useProductListAtom(productListAtom: PrimitiveAtom<ProductT[]>){
+export function useProductListAtom(productListAtom: PrimitiveAtom<ProductT[]>) {
   const [productList, setProductList] = useAtom(productListAtom);
 
-  function addProduct(product: ProductT){
-    setProductList((old: ProductT[]) => [...old, product])
+  function addProduct(product: ProductT) {
+    setProductList((old: ProductT[]) => [...old, product]);
   }
 
-  function deleteProduct(productId: string){
-    setProductList(mutation.deleteProduct(productId))
+  function deleteProduct(productId: string) {
+    setProductList(mutation.deleteProduct(productId));
   }
 
   return {
     productList,
     addProduct,
     deleteProduct,
-    setProductList
-  }
+    setProductList,
+  };
 }
 
 export default atom<ProductT[]>([]);
