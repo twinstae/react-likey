@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
-import { useAtom } from "jotai";
-import toast, { Toaster } from "react-hot-toast";
+import { atom, useAtom } from "jotai";
+import toast from "react-hot-toast";
 import { useBottomSheetAtom } from "./state/bottomSheetAtom";
 
+const clipBoardTextAtom = atom("");
+
 export default function useClipBoardToast() {
-  const [clipBoardText, setClipBoardText] = useState("");
+  const [clipBoardText, setClipBoardText] = useAtom(clipBoardTextAtom);
 
   useEffect(() => {
     if (clipBoardText !== "") {
