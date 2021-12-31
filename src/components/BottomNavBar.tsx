@@ -9,7 +9,10 @@ function BottomNavBar() {
   const navigator = useNavigator();
 
   return (
-    <div className="max-w-md w-full flex absolute bottom-0 justify-around items-center h-14 z-2 bg-white rounded-lg shadow-xl">
+    <div
+      className="max-w-md w-full flex absolute bottom-0 justify-around items-center h-14 z-2 bg-white rounded-lg shadow-xl"
+      style={{ left: "50%", transform: "translateX(-50%)" }}
+    >
       <div className="flex-1 text-center p-4">
         <button
           id="btn-category"
