@@ -3,7 +3,7 @@ import Home from "./pages/home";
 import "tailwindcss/tailwind.css";
 import "./app.css";
 import { Toaster } from "react-hot-toast";
-import { Navigator, Screen, ScreenHelmet } from "@karrotframe/navigator";
+import { Navigator, Screen } from "@karrotframe/navigator";
 import "@karrotframe/navigator/index.css";
 import BottomNavBar from "./components/BottomNavBar";
 

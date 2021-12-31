@@ -4,13 +4,15 @@ import ProductList from "../components/ProductList";
 import AddProductSheet from "../components/AddProductSheet";
 import useProductListBackUp from "../state/useProductListBackUp";
 import BottomNavBar from "../components/BottomNavBar";
+import { ScreenHelmet } from "@karrotframe/navigator";
 
 export default function Home() {
   const { productList } = useProductListBackUp();
 
   return (
     <>
-      <div className="flex flex-col justify-start items-center bg-indigo-100">
+      <ScreenHelmet title="Likey" />
+      <div className="flex flex-col h-full justify-start items-center bg-indigo-100">
         <div className="max-w-md shadow-lg bg-white relative p-4">
           <div data-testid="home">
             {productList.length === 0 ? (
