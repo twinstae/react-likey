@@ -23,8 +23,8 @@ const App = () => {
             )}
           />
         </Navigator>
-        <Toaster position="bottom-center" reverseOrder={false} />
       </div>
+      <Toaster position="bottom-center" reverseOrder={false} />
     </>
   );
 };

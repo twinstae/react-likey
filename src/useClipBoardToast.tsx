@@ -3,15 +3,23 @@ import React, { useEffect } from "react";
 import { atom, useAtom } from "jotai";
 import toast from "react-hot-toast";
 import { useBottomSheetAtom } from "./state/bottomSheetAtom";
+import ClipBoardToast from "./components/ClipBoardToast";
 
 const clipBoardTextAtom = atom("");
 
 export default function useClipBoardToast() {
   const [clipBoardText, setClipBoardText] = useAtom(clipBoardTextAtom);
+  const { open } = useBottomSheetAtom();
 
   useEffect(() => {
     if (clipBoardText !== "") {
-      toast(clipBoardText);
+      toast.custom((t) => (
+        <ClipBoardToast
+          visible={t.visible}
+          clipBoardText={clipBoardText}
+          open={open}
+        />
+      ));
     }
   }, [clipBoardText]);
 
@@ -27,8 +35,6 @@ export default function useClipBoardToast() {
 
     return () => clearInterval(intervalId);
   }, []);
-
-  const { open } = useBottomSheetAtom();
 
   return {
     clipBoardText,
