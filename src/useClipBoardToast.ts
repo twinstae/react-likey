@@ -14,10 +14,16 @@ export default function useClipBoardToast() {
   }, [clipBoardText]);
 
   useEffect(() => {
-    const interval = setInterval(() => navigator.clipboard.readText().then(setClipBoardText), 3 * 1000);
+    const intervalId = setInterval(
+      () =>
+        navigator.clipboard.readText().then((newText) => {
+          if (clipBoardText !== newText) setClipBoardText(newText);
+        }),
+      3 * 1000
+    );
     // 3초마다 확인
 
-    return () => clearInterval(interval);
+    return () => clearInterval(intervalId);
   }, []);
 
   const { open } = useBottomSheetAtom();
@@ -27,6 +33,6 @@ export default function useClipBoardToast() {
     open: (url: string) => {
       setClipBoardText(url);
       open(url);
-    }
+    },
   };
 }
