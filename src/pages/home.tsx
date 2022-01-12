@@ -13,13 +13,9 @@ export default function Home() {
     <>
       <ScreenHelmet title="Likey" />
       <div className="flex flex-col h-full justify-start items-center bg-indigo-100">
-        <div className="max-w-md shadow-lg bg-white relative p-4">
+        <div className="max-w-md h-full shadow-lg bg-white relative p-4">
           <div data-testid="home">
-            {productList.length === 0 ? (
-              <Usage />
-            ) : (
-              <ProductList productList={productList} />
-            )}
+            {productList.length === 0 ? <Usage /> : <ProductList productList={productList} />}
 
             <AddProductSheet />
           </div>
