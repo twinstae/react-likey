@@ -1,41 +1,29 @@
 {
-    "compilerOptions": {
-      "target": "es6",
-      "lib": [
-        "dom",
-        "dom.iterable",
-        "esnext"
-      ],
-      "typeRoots": [
-        "./node_modules/@types",
-        "@types",
-        "global.d.ts"
-      ],
-      "allowJs": true,
-      "skipLibCheck": true,
-      "declaration": true,
-      "esModuleInterop": true,
-      "allowSyntheticDefaultImports": true,
-      "strict": true,
-      "forceConsistentCasingInFileNames": true,
-      "noFallthroughCasesInSwitch": true,
-      "module": "esnext",
-      "moduleResolution": "node",
-      "resolveJsonModule": true,
-      "isolatedModules": true,
-      "noEmit": true,
-      "jsx": "react-jsx",
-      "outDir": "./dist",
-    },    
-    "include": [
-      "src/**/*.js",
-      "src/**/*.jsx",
-      "src/**/*.ts",
-      "src/**/*.tsx"
-, "jest.config.js"    ],
-    "exclude": [
-      "node_modules",
-      "**/*-aot.ts"
-    ]
-  }
-  
+  "compilerOptions": {
+    "target": "es2021",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "typeRoots": ["./node_modules/@types", "@types", "global.d.ts"],
+    "baseUrl": "src",
+    "allowJs": true,
+    "skipLibCheck": true,
+    "declaration": true,
+    "sourceMap": true,
+    // "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    // "module": "esnext",es2015, commonjs
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "outDir": "./dist",
+    "types": ["puppeteer"]
+    // "types": ["puppeteer", "expect-puppeteer", "jest-environment-puppeteer"]
+  },
+  "include": ["src/**/*.js", "src/**/*.jsx", "src/**/*.ts", "src/**/*.tsx", "jest.config.js"],
+  "exclude": ["node_modules", "**/*-aot.ts"]
+}
