@@ -8,7 +8,7 @@ module.exports = {
     alias: {
       pages: path.resolve(__dirname, "src/pages"),
     },
-    extensions: [".js", ".jsx", ".ts", ".tsx"],
+    extensions: [".js", ".jsx", ".ts", ".tsx", ".d.ts"],
   },
   module: {
     rules: [
